@@ -21,7 +21,7 @@ jobs:
         run: ./mvnw --batch-mode package
 
       - name: Set artifact version
-        run: ./mvnw --batch-mode versions:set -DnewVersion=${{ steps.set_version.outputs.version }}
+        run: ./mvnw --batch-mode versions:set -DnewVersion=${{ github.event.release.tag_name }}
 
       - name: Version
         run: |

@@ -19,7 +19,7 @@ jobs:
           ref: main
 
       - name: Update pom.xml version
-        run: ./mvnw --batch-mode versions:set -DnewVersion=${{ steps.set_version.outputs.version }}
+        run: ./mvnw --batch-mode versions:set -DnewVersion=${{ github.event.release.tag_name }}
 
       - name: Update readme
         run: sed -i 's/<version>.*<\/version>/<version>0.0.2<\/version>/g' README.md

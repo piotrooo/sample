@@ -17,11 +17,8 @@ jobs:
           java-version: 8
           distribution: temurin
 
-      - name: Build with Apache Maven
-        run: ./mvnw --batch-mode package
-
       - name: Set artifact version
-        run: ./mvnw --batch-mode versions:set -DnewVersion=${{ github.event.release.tag_name }}
+        run: ./mvnw --batch-mode versions:set -DgenerateBackupPoms=falses -DnewVersion=${{ github.event.release.tag_name }}
 
       - name: Version
         run: |

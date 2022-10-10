@@ -35,3 +35,4 @@ jobs:
             Update versions to ${GITHUB_REF##*/}
           branch: update-versions
           delete-branch: true
+          reviewers: piotrooo

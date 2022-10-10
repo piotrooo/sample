@@ -23,9 +23,6 @@ jobs:
       - name: Set artifact version
         run: ./mvnw --batch-mode versions:set -DnewVersion=${{ steps.set_version.outputs.version }}
 
-      - name: Publish package to Apache Maven Central
-        run: ./mvnw --batch-mode deploy
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+      - name: Version
+        run: |
+          cat pom.xml

@@ -1,0 +1,37 @@
+name: Update versions
+
+on:
+  release:
+    types: [ published ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    permissions:
+      contents: write  # for peter-evans/create-pull-request to create branch
+      pull-requests: write  # for peter-evans/create-pull-request to create a PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Update pom.xml version
+        run: ./mvnw --batch-mode versions:set -DnewVersion=${{ steps.set_version.outputs.version }}
+
+      - name: Update readme
+        run: sed -i 's/<version>.*<\/version>/<version>0.0.2<\/version>/g' README.md
+
+      - name: Show diff
+        run: git diff
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@671dc9c9e0c2d73f07fa45a3eb0220e1622f0c5f # v3.10.1
+        with:
+          title: Update versions to ${GITHUB_REF##*/}
+          body: |
+            Update versions to ${GITHUB_REF##*/}
+          branch: update-versions
+          delete-branch: true

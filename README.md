@@ -8,6 +8,9 @@ Java dependency
 </dependency>
 ```
 
+```
+implementation 'org.sample:demo:0.0.7'
+```
 
 something
 another something

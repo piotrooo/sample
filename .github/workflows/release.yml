@@ -37,8 +37,11 @@ jobs:
       - name: Update pom.xml version
         run: ./mvnw --batch-mode versions:set -DgenerateBackupPoms=false -DnewVersion=${{ github.event.release.tag_name }}
 
-      - name: Update readme
+      - name: Update Maven version in readme
         run: sed -i 's/<version>.*<\/version>/<version>${{ github.event.release.tag_name }}<\/version>/g' README.md
+        
+      - name: Update Maven version in readme
+        run: sed -i "s/implementation 'org.sample:demo:.*/implementation 'org.sample:demo:${{ github.event.release.tag_name }}'/g" README.md
 
       - name: Show diff
         run: git diff

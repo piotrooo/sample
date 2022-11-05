@@ -16,6 +16,13 @@ jobs:
         with:
           java-version: 8
           distribution: temurin
+          
+      - name: Set version
+        uses: actions/github-script@v6
+        id: set_version
+        with:
+          script: |
+            core.setOutput('sample', 'sample string')
 
       - name: Set artifact version
         run: ./mvnw --batch-mode versions:set -DgenerateBackupPoms=falses -DnewVersion=${{ github.event.release.tag_name }}
@@ -33,6 +40,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main
+
+      - name: Echo
+        run: echo ${{ jobs.publish.steps.set_version.outputs.sample }}
 
       - name: Update pom.xml version
         run: ./mvnw --batch-mode versions:set -DgenerateBackupPoms=false -DnewVersion=${{ github.event.release.tag_name }}

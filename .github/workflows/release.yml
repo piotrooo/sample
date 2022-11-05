@@ -30,6 +30,8 @@ jobs:
       - name: Version
         run: |
           cat pom.xml
+    outputs:
+      sample: ${{ steps.set_version.outputs.sample }}
   update-version:
     needs: [publish]
     permissions:
@@ -42,7 +44,7 @@ jobs:
           ref: main
 
       - name: Echo
-        run: echo ${{ jobs.publish.steps.set_version.outputs.sample }}
+        run: echo ${{ needs.publish.outputs.sample }}
 
       - name: Update pom.xml version
         run: ./mvnw --batch-mode versions:set -DgenerateBackupPoms=false -DnewVersion=${{ github.event.release.tag_name }}

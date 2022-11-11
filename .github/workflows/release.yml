@@ -66,4 +66,6 @@ jobs:
           body: |
             Update versions to ${{ github.event.release.tag_name }}
           branch: update-versions
-          reviewers: piotrooo
+          labels: |
+            documentation
+            enhancement

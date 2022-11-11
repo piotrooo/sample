@@ -39,13 +39,6 @@ jobs:
       pull-requests: write  # for peter-evans/create-pull-request to create a PR
     runs-on: ubuntu-latest
     steps:
-      - name: Git status
-        run: git status
-
-      - uses: actions/checkout@v3
-        with:
-          ref: main
-
       - name: Echo
         run: echo ${{ needs.publish.outputs.sample }}
 

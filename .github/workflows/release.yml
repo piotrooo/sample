@@ -39,8 +39,11 @@ jobs:
       pull-requests: write  # for peter-evans/create-pull-request to create a PR
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3.1.0
+
       - name: Echo
-        run: echo ${{ needs.publish.outputs.sample }}
+        run: echo ${{ github.event }}
 
       - name: Update pom.xml version
         run: ./mvnw --batch-mode versions:set -DgenerateBackupPoms=false -DnewVersion=${{ github.event.release.tag_name }}
@@ -57,6 +60,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.0
         with:
+          base: master
           commit-message: Update versions to ${{ github.event.release.tag_name }}
           title: Update versions to ${{ github.event.release.tag_name }}
           body: |

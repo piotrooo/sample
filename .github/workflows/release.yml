@@ -39,6 +39,9 @@ jobs:
       pull-requests: write  # for peter-evans/create-pull-request to create a PR
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3.1.0
+
       - name: Echo
         run: echo ${{ needs.publish.outputs.sample }}
 

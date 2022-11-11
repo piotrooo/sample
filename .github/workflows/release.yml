@@ -41,6 +41,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3.1.0
+        with:
+          ref: master
 
       - name: Echo
         run: echo ${{ needs.publish.outputs.sample }}

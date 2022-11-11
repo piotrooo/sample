@@ -45,7 +45,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3.1.0
         with:
-          ref: master
+          ref: main
           fetch-depth: 0
 
       - name: Update pom.xml version

@@ -67,7 +67,6 @@ jobs:
           title: Update versions to ${{ github.event.release.tag_name }}
           body: Update versions to ${{ github.event.release.tag_name }}
           branch: update-versions-${{ github.event.release.tag_name }}
-          delete-branch: true
           labels: |
             documentation
             enhancement
